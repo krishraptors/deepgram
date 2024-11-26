@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Mic, StopCircle, Save, FileText } from "lucide-react";
+import { toast } from 'react-toastify';
 
 const AudioRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -67,14 +68,14 @@ const AudioRecorder = () => {
 
   const saveTranscription = () => {
     if (!transcription.trim()) {
-      alert("No transcription available to save!");
+      toast.error("No transcription available to save!");
       return;
     }
 
     const updatedTranscriptions = [...savedTranscriptions, transcription];
     setSavedTranscriptions(updatedTranscriptions);
     localStorage.setItem("transcriptions", JSON.stringify(updatedTranscriptions));
-    alert("Transcription saved!");
+    toast.success("Transcription saved!");
   };
 
   return (
